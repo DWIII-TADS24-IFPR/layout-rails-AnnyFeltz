@@ -1,19 +1,43 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
+
+<div class="voltar mb-4">
+  <%= link_to posts_path, class: "btn", title: "Voltar para a lista de posts" do %>
+    <span class="material-symbols-outlined">undo</span>
+  <% end %>
+</div>
 
 <%= render @post %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+<div class="opções mt-2">
+  <%= link_to edit_post_path(@post), class: "btn btn-primary", title: "Editar este post" do %>
+    <span class="material-symbols-outlined">edit</span>
+  <% end %>
 
+  <%= link_to posts_path, class: "btn btn-neutral", title: "Voltar para posts" do %>
+    <span class="material-symbols-outlined">undo</span>
+  <% end %>
 
-  <h2>Comments</h2>
-
-  <ul>
-    <% @post.comments.each do |comment |  %>
-      <li><%= comment.content %></li>
-    <% end %>
-  </ul>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <%= button_to @post, method: :delete, class: "btn btn-danger", title: "Excluir este post" do %>
+    <span class="material-symbols-outlined">delete</span>
+  <% end %>
 </div>
+
+<h2 class="page-title mt-4">Comments</h2>
+
+<ul class="comments-list" style="list-style: none; padding-left: 0;">
+  <% @post.comments.each do |comment| %>
+    <li class="card p-2 mb-2">
+      <%= comment.content %>
+
+      <div class="opções mt-1">
+        <%= link_to edit_comment_path(comment), class: "btn btn-primary btn-sm", title: "Editar comentário" do %>
+          <span class="material-symbols-outlined">edit</span>
+        <% end %>
+
+        <%= button_to comment, method: :delete, class: "btn btn-danger btn-sm", title: "Excluir comentário" do %>
+          <span class="material-symbols-outlined">delete</span>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>

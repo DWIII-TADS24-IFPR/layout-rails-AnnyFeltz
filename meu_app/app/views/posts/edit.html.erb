@@ -1,12 +1,17 @@
 <% content_for :title, "Editing post" %>
 
-<h1>Editing post</h1>
+<h2 class="page-title center-text">Edit Post</h2>
 
-<%= render "form", post: @post %>
+<div class="form-box">
+  <%= render "form", post: @post %>
 
-<br>
+  <div class="opções mt-4">
+    <%= link_to @post, class: "btn btn-neutral", title: "Visualizar post" do %>
+      <span class="material-symbols-outlined">visibility</span>
+    <% end %>
 
-<div>
-  <%= link_to "Show this post", @post %> |
-  <%= link_to "Back to posts", posts_path %>
+    <%= link_to posts_path, class: "btn btn-neutral", title: "Voltar para posts" do %>
+      <span class="material-symbols-outlined">undo</span>
+    <% end %>
+  </div>
 </div>

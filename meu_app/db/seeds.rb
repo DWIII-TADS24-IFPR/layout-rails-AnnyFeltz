@@ -15,6 +15,6 @@
   ])
 
 
-    Comment.create!([
-      { content: "será??, ou RoR?", post_id: 1}
-    ])
+  Comment.create!([
+    { content: "será??, ou RoR?", post_id: 1}
+  ])

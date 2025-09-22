@@ -1,21 +1,20 @@
-<div>
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <% if admin_signed_in? %>
+        <% nome = current_admin.email.split("@").first.split(".").map(&:capitalize).join(".") %>
+        <span>👋 <%= nome %></span>
+      <% end %>
+    </div>
 
-    <% if admin_signed_in? %>
-        <%= current_admin.email %>
-    <% end%>
-    <ul>
-        <li>
-            <%= link_to "Home", root_path %>
-        </li>
-
-        <li>
-            <%= link_to "Post", posts_path %>
-        </li>
-
-        <li>
-            <%= link_to "Comment", comments_path %>
-        </li>
+    <ul class="navbar-links">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Post", posts_path %></li>
+      <li><%= link_to "Comment", comments_path %></li>
     </ul>
 
-    <%= link_to "Deslogar", destroy_admin_session_path, method: :delete, data: { turbo_method: :delete } %>
-</div>
+    <div class="navbar-logout">
+      <%= link_to "Sign Out", destroy_admin_session_path, method: :delete, data: { turbo_method: :delete } %>
+    </div>
+  </div>
+</nav>

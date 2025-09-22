@@ -1,12 +1,17 @@
 <% content_for :title, "Editing comment" %>
 
-<h1>Editing comment</h1>
+<h2 class="page-title center-text">Edit Comment</h2>
 
-<%= render "form", comment: @comment %>
+<div class="form-box">
+  <%= render "form", comment: @comment %>
+  <br>
+  <div class="opções mt-4">
+    <%= link_to @comment, class: "btn btn-neutral", title: "Visualizar comentário" do %>
+      <span class="material-symbols-outlined">visibility</span>
+    <% end %>
 
-<br>
-
-<div>
-  <%= link_to "Show this comment", @comment %> |
-  <%= link_to "Back to comments", comments_path %>
+    <%= link_to comments_path, class: "btn btn-neutral", title: "Voltar para comentários" do %>
+      <span class="material-symbols-outlined">undo</span>
+    <% end %>
+  </div>
 </div>

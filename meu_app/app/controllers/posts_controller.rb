@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy like ]
 
-  # GET /posts or /posts.json
+  # GET /posts
   def index
     @posts = Post.all
   end
 
-  # GET /posts/1 or /posts/1.json
+  # GET /posts/1
   def show
   end
 
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   def edit
   end
 
-  # POST /posts or /posts.json
+  # POST /posts
   def create
     @post = Post.new(post_params)
 
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
+  # PATCH/PUT /posts/1
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -47,24 +47,41 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
+  # DELETE /posts/1
   def destroy
     @post.destroy!
-
     respond_to do |format|
       format.html { redirect_to posts_path, notice: "Post was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params.expect(:id))
+  # POST /posts/1/like
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
+  before_action :authenticate_admin!  # garante que só admin possa curtir
+
+  def like
+    like = @post.likes.find_by(admin: current_admin)
+
+    if like
+      like.destroy  # já curtiu? remove
+    else
+      @post.likes.create(admin: current_admin)
     end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :content ])
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js   # usamos JS para atualizar contador sem recarregar
     end
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
 end

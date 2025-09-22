@@ -1,0 +1,10 @@
+const likeBtn = document.getElementById("like-btn-<%= @post.id %>");
+const likeCount = document.getElementById("like-count-<%= @post.id %>");
+
+<% if @post.liked_by?(current_admin) %>
+likeBtn.querySelector("span.material-symbols-outlined").innerText = "favorite";
+<% else %>
+likeBtn.querySelector("span.material-symbols-outlined").innerText = "favorite_border";
+<% end %>
+
+likeCount.innerText = "<%= @post.likes_count %>";

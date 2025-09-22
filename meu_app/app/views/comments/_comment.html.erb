@@ -1,12 +1,8 @@
-<div id="<%= dom_id comment %>">
-  <p>
-    <strong>Content:</strong>
-    <%= comment.content %>
-  </p>
+<div id="<%= dom_id comment %>" class="card">
+  <h3 class="comment-title">Comentário</h3>
+  <p class="comment-content"><%= comment.content %></p>
 
-  <p>
-    <strong>Post:</strong>
-    <%= comment.post_id %>
-  </p>
-
+  <h4 class="comment-title">Post ID</h4>
+  <p class="comment-content"><%= comment.post_id %></p>
 </div>
+  

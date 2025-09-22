@@ -1,11 +1,11 @@
 <% content_for :title, "New comment" %>
 
-<h1>New comment</h1>
+<h1 class="page-title">New Comment</h1>
 
 <%= render "form", comment: @comment %>
 
-<br>
-
-<div>
-  <%= link_to "Back to comments", comments_path %>
+<div style="display: flex; align-items: center; gap: 0.5vw; margin-top: 2vh;">
+  <%= link_to comments_path, class: "btn btn-neutral inline-flex items-center", title: "Voltar para a lista de comments" do %>
+    <span class="material-symbols-outlined">undo</span>
+  <% end %>
 </div>

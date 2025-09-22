@@ -1,16 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
 <% content_for :title, "Comments" %>
 
-<h1>Comments</h1>
+<h1 class="page-title">Comments</h1>
 
-<div id="comments">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 1vw; margin-bottom: 2vh;">
+  <div class="voltar">
+    <%= link_to posts_path, class: "voltar", title: "Voltar para a lista de posts" do %>
+      <span class="material-symbols-outlined">undo</span>
+    <% end %>
+  </div>
+</div>
+
+<div id="comments" class="comments-list">
   <% @comments.each do |comment| %>
     <%= render comment %>
-    <p>
-      <%= link_to "Show this comment", comment %>
-    </p>
+
+    <div class="flex-center-horizontal" style="gap: 0.5vw; align-items: center; margin-bottom: 1vh;">
+      <%= link_to comment, class: "btn btn-neutral inline-flex items-center", title: "Visualizar este comment" do %>
+        <span class="material-symbols-outlined">visibility</span>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New comment", new_comment_path %>
+<div class="opções">
+  <%= link_to "New comment", new_comment_path, class: "btn btn-primary mt-2 inline-block" %>
+</div>

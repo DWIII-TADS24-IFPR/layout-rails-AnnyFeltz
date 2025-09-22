@@ -1,10 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
+
+<div class="voltar">
+  <%= link_to comments_path, class: "btn", title: "Voltar para a lista de comentários" do %>
+    <span class="material-symbols-outlined">undo</span>
+  <% end %>
+</div>
 
 <%= render @comment %>
 
-<div>
-  <%= link_to "Edit this comment", edit_comment_path(@comment) %> |
-  <%= link_to "Back to comments", comments_path %>
+<div class="opções">
+  <%= link_to edit_comment_path(@comment), class: "btn btn-primary", title: "Editar este comentário" do %>
+    <span class="material-symbols-outlined">edit</span>
+  <% end %>
 
-  <%= button_to "Destroy this comment", @comment, method: :delete %>
+  <%= button_to @comment, method: :delete, class: "btn btn-danger", title: "Excluir este comentário" do %>
+    <span class="material-symbols-outlined">delete</span>
+  <% end %>
 </div>
